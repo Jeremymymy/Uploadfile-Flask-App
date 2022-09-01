@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>上傳影像檔</title>
+</head>
+<body>
+    <h1>上傳影像檔</h1>
+    {% with msg = get_flashed_messages() %}
+        {% if msg %}
+            {% for m in msg %}
+                <p>{{ m }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form method="post" action="/" enctype="multipart/form-data">
+        <input type="file" name="filename" accept=".png, .jpg, .jpeg, .gif" required>
+        <input type="submit" value="上傳">
+    </form>
+    <br>
+    {% if filenames %}
+        {% for filename in filenames %}
+            <div>
+                <a href="{{ url_for('show_image', filename=filename) }}" target="_blank">{{ filename }}</a>
+            </div>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
